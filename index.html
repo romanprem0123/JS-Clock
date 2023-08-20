@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Clock</title>
+		
+		<!-- Stylesheet -->
+		<link rel="stylesheet" href="/css/style.css">		
+	</head>
+<body>
+
+<div id="main">
+	<div class="clock">
+		<span id="hours">00</span>
+		<span class="dot">:</span>
+		<span id="minutes">00</span>
+		<div class="clock_zone">
+			<span id="second">00</span>
+			<span id="timeZone"></span>
+		</div>
+	</div>
+	<div class="days">
+		<span id="days"></span>
+	</div>
+</div>
+	
+<script>
+	
+	function clock(){
+	
+	//Get Element
+	
+		let currentHrs = document.getElementById('hours');
+		let currentMin = document.getElementById('minutes');
+		let currentSec = document.getElementById('second');
+		let currentZone = document.getElementById('timeZone');
+		let currentDay = document.getElementById('days');
+		
+		
+		let time = new Date();
+		
+	//Get Date
+		
+		let getHrs = time.getHours();
+		let getMin = time.getMinutes();
+		let getSec = time.getSeconds();
+		let getDay = time.toString().split(' ')[0];
+		let amOrPm = getHrs >=12 ? "PM":"AM";
+		
+	// set 12 hours time format
+		getHrs = getHrs > 12 ? getHrs % 12 : getHrs;
+
+
+	//Add 0 value	
+		if(getHrs<10){
+			getHrs = "0"+getHrs;
+		}
+		if(getMin<10){
+			getMin = "0"+getMin;
+		}
+		if(getSec<10){
+			getSec = "0"+getSec;
+		}
+	
+	//Add day
+		if(getDay=="Sun"){
+			getDay = getDay+"day";
+		}
+		else if(getDay=="Mon"){
+			getDay = getDay+"day";
+		}
+		else if(getDay=="Tue"){
+			getDay = getDay+"sday";
+		}
+		else if(getDay=="Wed"){
+			getDay = getDay+"nesday";
+		}
+		else if(getDay=="Thu"){
+			getDay = getDay+"rsday";
+		}
+		else if(getDay=="Fri"){
+			getDay = getDay+"day";
+		}
+		else if(getDay=="Sat"){
+			getDay = getDay+"urday";
+		}
+
+	//Assign Value
+		
+		currentHrs.innerHTML = getHrs;
+		currentMin.innerHTML = getMin;
+		currentSec.innerHTML = getSec;
+		currentZone.innerHTML = amOrPm;
+		currentDay.innerHTML = getDay;
+		
+	//AM or PM
+  
+		getHrs = getHrs ? getHrs:12;
+		getHrs>12 ? getHrs = getHrs%12:"";
+		
+		
+		
+	}
+	
+	//Time Update
+	
+	setInterval(clock, 1000);
+
+</script>
+</body>
+</html>
